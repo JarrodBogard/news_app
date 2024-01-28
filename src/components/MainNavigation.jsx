@@ -2,21 +2,51 @@ import { Link } from "react-router-dom";
 
 const MainNavigation = () => {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to={"/"}>Logo</Link>
-        </li>
-        <li>
-          <Link to={"/about"}>About</Link>
-        </li>
-      </ul>
-      <ul>
-        <li>
-          <Link to={"/login"}>Login</Link>
-        </li>
-      </ul>
+    <nav className="navbar navbar-expand-lg bg-secondary bg-gradient sticky-top border-bottom border-light">
+      <div className="container-fluid">
+        <Link className="navbar-brand text-white" to={"/"}>
+          Logo
+        </Link>
+        <div
+          className="collapse navbar-collapse justify-content-between"
+          id="navbarNav"
+        >
+          <ul className="navbar-nav ">
+            <li className="nav-item">
+              <Link
+                className="nav-link text-white"
+                aria-current="page"
+                to={"/about"}
+              >
+                About
+              </Link>
+            </li>
+          </ul>
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link text-white" to={"/login"}>
+                Login
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
+    // <nav>
+    //   <ul>
+    //     <li>
+    //       <Link to={"/"}>Logo</Link>
+    //     </li>
+    //     <li>
+    //       <Link to={"/about"}>About</Link>
+    //     </li>
+    //   </ul>
+    //   <ul>
+    //     <li>
+    //       <Link to={"/login"}>Login</Link>
+    //     </li>
+    //   </ul>
+    // </nav>
   );
 };
 

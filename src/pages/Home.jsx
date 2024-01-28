@@ -9,48 +9,22 @@ const HomePage = () => {
     navigate("/articles?query=" + selection);
   };
 
-  // const displayData = (
-  //   <ul className="row list-group" style={{ width: "18rem" }}>
-  //     {articles.map((article) => (
-  //       <li
-  //         style={{ height: "20rem" }}
-  //         className="list-group-item w-100 col-4"
-  //         key={article.source.id + Math.random()}
-  //       >
-  //         <img
-  //           className="card-img-top rounded w-100"
-  //           src={article.urlToImage}
-  //           alt={article.title}
-  //         />
-
-  //         <div className="card-body w-100">
-  //           <h5 className="card-title">{article.title}</h5>
-  //           {/* <p className="card-text">{article.description}</p> */}
-  //           <a href="#" className="btn btn-primary">
-  //             Go somewhere
-  //           </a>
-  //         </div>
-  //       </li>
-  //     ))}
-  //   </ul>
-  // );
-
   const displayData = (
     <div className="row">
       {articles.map((article) => (
         <div key={article.source.id + Math.random} className="col-4 g-4">
-          <div className="card">
-            <img
-              src={article.urlToImage}
-              alt={article.title}
-              className="card-img-top"
-            />
-            <div className="card-body">
+          <div
+            className="card bg-light"
+            style={{ width: "22rem", height: "22rem" }}
+          >
+            <div className="card-body d-flex flex-column justify-content-around text-center shadow">
+              <img
+                src={article.urlToImage}
+                alt={article.title}
+                className="rounded shadow"
+                style={{ height: "200px" }}
+              />
               <h5>{article.title}</h5>
-              <p>{article.description}</p>
-              <a href="#" className="btn btn-primary">
-                Go somewhere
-              </a>
             </div>
           </div>
         </div>
@@ -58,29 +32,12 @@ const HomePage = () => {
     </div>
   );
 
-  // const displayData = (
-  //   <ul className="row justify-content-around ">
-  //     {articles.map((article) => (
-  //       <li
-  //         className="list-group-item m-2 col-3"
-  //         key={article.source.id + Math.random()}
-  //       >
-  //         <h1>{article.title}</h1>
-  //         <img
-  //           className="img-thumbnail"
-  //           src={article.urlToImage}
-  //           alt={article.title}
-  //         />
-  //         <p>{article.description}</p>
-  //       </li>
-  //     ))}
-  //   </ul>
-  // );
-
   return (
     <div className="container">
       <Form className="w-50 m-auto" action="articles">
-        <h1 className="h-1 text-center text-muted">Article Search</h1>
+        <h1 className="h-1 text-center text-muted text-secondary m-2">
+          Article Search
+        </h1>
         <Form.Control
           type="text"
           name="query"
