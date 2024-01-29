@@ -4,15 +4,18 @@ import { useState } from "react";
 
 const Card = () => {
   const { articles } = useLoaderData();
-  //   keys: author, content, description, publishedAt, source {id, name}, title, url, urlToImage
   const [isToggled, setIsToggled] = useState(false);
   const [filteredArticle, setFilteredArticle] = useState(null);
 
-  const handleClick = (selection) => {
-    setIsToggled(!isToggled);
+  const handleOpen = (selection) => {
     setFilteredArticle(
       ...articles.filter((article) => article.title === selection)
     );
+    setIsToggled(true);
+  };
+
+  const handleClose = () => {
+    setIsToggled(false);
   };
 
   const cardData = (
@@ -21,7 +24,7 @@ const Card = () => {
         <div
           key={article.source.id + Math.random()}
           className="col-4 g-4"
-          onClick={() => handleClick(article.title)}
+          onClick={() => handleOpen(article.title)}
         >
           <div
             className="card bg-light text-center  "
@@ -43,7 +46,9 @@ const Card = () => {
 
   return (
     <>
-      {isToggled && <ArticlePage article={filteredArticle} />}
+      {isToggled && (
+        <ArticlePage article={filteredArticle} onClose={handleClose} />
+      )}
       {cardData}
     </>
   );
