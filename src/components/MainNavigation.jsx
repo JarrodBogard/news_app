@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const MainNavigation = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-secondary bg-gradient sticky-top border-bottom border-light">
+    <nav className="navbar navbar-expand-lg bg-dark bg-gradient sticky-top border-bottom border-light">
       <div className="container-fluid">
         <Link className="navbar-brand text-white" to={"/"}>
           Logo

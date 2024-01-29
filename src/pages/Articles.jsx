@@ -1,21 +1,13 @@
-import { useLoaderData } from "react-router";
+import SearchBar from "../components/SearchBar";
+import Card from "../components/Card";
 
 const ArticlesPage = () => {
-  const { articles } = useLoaderData();
-  //   keys: author, content, description, publishedAt, source {id, name}, title, url, urlToImage
-
-  const displayData = (
-    <ul>
-      {articles.map((article) => (
-        <li key={article.source.id + Math.random()}>
-          <h1>{article.title}</h1>
-          <img src={article.urlToImage} alt={article.title} />
-        </li>
-      ))}
-    </ul>
+  return (
+    <div className="container">
+      <SearchBar />
+      <Card />
+    </div>
   );
-
-  return <>{displayData}</>;
 };
 
 export default ArticlesPage;
