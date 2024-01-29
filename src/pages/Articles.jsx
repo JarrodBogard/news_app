@@ -1,5 +1,5 @@
-import SearchBar from "../components/SearchBar";
-import Card from "../components/Card";
+import SearchBar from "../components/UI/SearchBar";
+import Card from "../components/UI/Card";
 
 const ArticlesPage = () => {
   return (

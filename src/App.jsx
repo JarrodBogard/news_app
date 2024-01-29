@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // layouts
-import RootLayout from "./layouts/Root";
+import RootLayout from "./components/layouts/Root";
 
 // pages
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
 import ArticlesPage from "./pages/Articles";
+import ArticlePage from "./pages/Article";
 
 // components
 
@@ -31,6 +32,7 @@ function App() {
               element: <ArticlesPage />,
               loader: searchBarArticlesLoader,
             },
+            { index: ":articleId", element: <ArticlePage /> },
           ],
         },
       ],

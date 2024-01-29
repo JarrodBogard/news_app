@@ -32,21 +32,6 @@ const MainNavigation = () => {
         </div>
       </div>
     </nav>
-    // <nav>
-    //   <ul>
-    //     <li>
-    //       <Link to={"/"}>Logo</Link>
-    //     </li>
-    //     <li>
-    //       <Link to={"/about"}>About</Link>
-    //     </li>
-    //   </ul>
-    //   <ul>
-    //     <li>
-    //       <Link to={"/login"}>Login</Link>
-    //     </li>
-    //   </ul>
-    // </nav>
   );
 };
 
