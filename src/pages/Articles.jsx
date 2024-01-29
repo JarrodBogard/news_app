@@ -1,11 +1,11 @@
 import SearchBar from "../components/UI/SearchBar";
-import Card from "../components/UI/Card";
+import ArticlesCard from "../components/UI/ArticlesCard";
 
 const ArticlesPage = () => {
   return (
     <div className="container">
       <SearchBar />
-      <Card />
+      <ArticlesCard />
     </div>
   );
 };

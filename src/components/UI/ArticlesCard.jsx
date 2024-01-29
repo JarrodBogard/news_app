@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import ArticlePage from "../../pages/Article";
 import { useState } from "react";
 
-const Card = () => {
+const ArticlesCard = () => {
   const { articles } = useLoaderData();
   const [isToggled, setIsToggled] = useState(false);
   const [filteredArticle, setFilteredArticle] = useState(null);
@@ -18,7 +18,7 @@ const Card = () => {
     setIsToggled(false);
   };
 
-  const cardData = (
+  const articlesCardData = (
     <div className="row">
       {articles.map((article) => (
         <div
@@ -49,9 +49,9 @@ const Card = () => {
       {isToggled && (
         <ArticlePage article={filteredArticle} onClose={handleClose} />
       )}
-      {cardData}
+      {articlesCardData}
     </>
   );
 };
 
-export default Card;
+export default ArticlesCard;
