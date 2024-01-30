@@ -5,20 +5,21 @@ const SearchBar = () => {
   const navigate = useNavigate();
 
   const handleSearch = (selection) => {
-    navigate("/articles?query=" + selection);
+    navigate("/articles?query=" + selection + "&page=1");
   };
 
   return (
     <>
+      <h1 className="h-1 text-center text-white m-2">Article Search</h1>
       <Form className="w-50 m-auto" action="articles">
-        <h1 className="h-1 text-center text-muted m-2">Article Search</h1>
         <Form.Control
+          className="shadow"
           type="text"
           name="query"
           placeholder="Search articles here..."
         />
       </Form>
-      <div className="container m-2 d-flex justify-content-around">
+      <div className="container mt-2 d-flex justify-content-around text-white">
         <div onClick={() => handleSearch("finance")}>Finance</div>
         <div onClick={() => handleSearch("politics")}>Politics</div>
         <div onClick={() => handleSearch("sports")}>Sports</div>

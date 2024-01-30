@@ -19,7 +19,7 @@ import "./index.css";
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/", // alt option "/"
       element: <RootLayout />,
       children: [
         { index: true, element: <HomePage />, loader: initArticlesLoader },

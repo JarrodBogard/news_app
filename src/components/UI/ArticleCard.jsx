@@ -7,7 +7,7 @@ const ArticleCard = ({ article, onClose }) => {
 
   const articleData = (
     <Modal onClose={onClose}>
-      <div className="card border border-0">
+      <div className="card border border-0 shadow">
         <img
           src={article.urlToImage}
           className="card-img-top "
