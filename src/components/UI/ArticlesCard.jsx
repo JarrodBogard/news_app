@@ -1,16 +1,17 @@
-import { useMemo } from "react";
+import { useState, useRef } from "react";
 import { useLoaderData } from "react-router-dom";
+
 import ArticlePage from "../../pages/Article";
 import Pagination from "../UI/Pagination";
-import { useState } from "react";
 
 const ArticlesCard = () => {
   const { articles } = useLoaderData();
+
   const [isToggled, setIsToggled] = useState(false);
   const [filteredArticle, setFilteredArticle] = useState(null);
 
-  const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(9);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const queryString = window.location.search;
   const params = new URLSearchParams(queryString);

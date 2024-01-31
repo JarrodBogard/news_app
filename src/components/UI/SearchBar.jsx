@@ -1,6 +1,8 @@
 import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
+import classes from "./SearchBar.module.css";
+
 const SearchBar = () => {
   const navigate = useNavigate();
 
@@ -20,11 +22,24 @@ const SearchBar = () => {
         />
       </Form>
       <div className="container mt-2 d-flex justify-content-around text-white">
-        <div onClick={() => handleSearch("finance")}>Finance</div>
-        <div onClick={() => handleSearch("politics")}>Politics</div>
-        <div onClick={() => handleSearch("sports")}>Sports</div>
-        <div onClick={() => handleSearch("health")}>Health</div>
-        <div onClick={() => handleSearch("technology")}>Technology</div>
+        <div className={classes.list} onClick={() => handleSearch("finance")}>
+          Finance
+        </div>
+        <div className={classes.list} onClick={() => handleSearch("politics")}>
+          Politics
+        </div>
+        <div className={classes.list} onClick={() => handleSearch("sports")}>
+          Sports
+        </div>
+        <div className={classes.list} onClick={() => handleSearch("health")}>
+          Health
+        </div>
+        <div
+          className={classes.list}
+          onClick={() => handleSearch("technology")}
+        >
+          Technology
+        </div>
       </div>
     </>
   );

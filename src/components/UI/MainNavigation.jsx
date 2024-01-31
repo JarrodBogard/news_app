@@ -1,32 +1,34 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
+import classes from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-dark bg-gradient sticky-top border-bottom border-light">
       <div className="container-fluid">
-        <Link className="navbar-brand text-white" to={"/"}>
+        <NavLink className="navbar-brand text-white" to={"/"}>
           Logo
-        </Link>
+        </NavLink>
         <div
           className="collapse navbar-collapse justify-content-between"
           id="navbarNav"
         >
-          <ul className="navbar-nav ">
+          <ul className={`navbar-nav ${classes.list}`}>
             <li className="nav-item">
-              <Link
-                className="nav-link text-white"
-                aria-current="page"
+              <NavLink
+                className={`nav-link text-white ${({ isActive }) =>
+                  isActive ? classes.active : ""}`}
                 to={"/about"}
               >
                 About
-              </Link>
+              </NavLink>
             </li>
           </ul>
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link text-white" to={"/login"}>
+              <NavLink className="nav-link text-white" to={"/login"}>
                 Login
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

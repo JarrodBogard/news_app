@@ -1,0 +1,4 @@
+.list:hover,
+.list:active {
+  font-weight: bolder;
+}

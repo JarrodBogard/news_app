@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useSearchParams,
+} from "react-router-dom";
 
 // layouts
 import RootLayout from "./components/layouts/Root";
@@ -19,10 +23,15 @@ import "./index.css";
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/", // alt option "/"
+      path: "/",
       element: <RootLayout />,
       children: [
-        { index: true, element: <HomePage />, loader: initArticlesLoader },
+        {
+          index: true,
+          element: <HomePage />,
+          loader: initArticlesLoader,
+          shouldRevalidate: () => false,
+        },
         { path: "about", element: <AboutPage /> },
         {
           path: "articles",
@@ -31,6 +40,12 @@ function App() {
               index: true,
               element: <ArticlesPage />,
               loader: searchBarArticlesLoader,
+              shouldRevalidate: ({ currentUrl, nextUrl }) => {
+                const oldQuery = currentUrl.searchParams.get("query");
+                const newQuery = nextUrl.searchParams.get("query");
+
+                return oldQuery !== newQuery;
+              },
             },
             { index: ":articleId", element: <ArticlePage /> },
           ],
