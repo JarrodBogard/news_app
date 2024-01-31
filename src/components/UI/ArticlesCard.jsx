@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 
 import ArticlePage from "../../pages/Article";
@@ -10,8 +10,11 @@ const ArticlesCard = () => {
   const [isToggled, setIsToggled] = useState(false);
   const [filteredArticle, setFilteredArticle] = useState(null);
 
-  const [itemsPerPage] = useState(9);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [queriedArticles, setQueriedArticles] = useState(null);
+
+  const inputRef = useRef(null);
 
   const queryString = window.location.search;
   const params = new URLSearchParams(queryString);
@@ -19,6 +22,24 @@ const ArticlesCard = () => {
   const page = params.get("page");
 
   if (query && currentPage !== page) setCurrentPage(page);
+
+  const handleSearch = () => {
+    const searchQuery = inputRef.current.value.trim().toLowerCase();
+    onFilter(searchQuery);
+  };
+
+  const onFilter = (searchQuery) => {
+    const filteredArticles = articles.filter((article) =>
+      article.title.toLowerCase().includes(searchQuery)
+    );
+
+    setQueriedArticles(filteredArticles);
+    setCurrentPage(1);
+  };
+
+  useEffect(() => {
+    console.log(queriedArticles, "fired");
+  }, [queriedArticles]);
 
   const handleOpen = (selection) => {
     setFilteredArticle(
@@ -35,9 +56,12 @@ const ArticlesCard = () => {
     setCurrentPage(number);
   };
 
+  let data = queriedArticles ? queriedArticles : articles;
+
+  const itemsPerPage = 9;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = articles.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   const articlesCardData = (
     <div className="row">
@@ -68,13 +92,19 @@ const ArticlesCard = () => {
 
   return (
     <>
+      <input
+        ref={inputRef}
+        type="text"
+        placeholder="Type keyword here..."
+        onChange={handleSearch}
+      />
       {isToggled && (
         <ArticlePage article={filteredArticle} onClose={handleClose} />
       )}
       {articlesCardData}
       <Pagination
         paginate={paginate}
-        totalItems={articles.length}
+        totalItems={data.length}
         itemsPerPage={itemsPerPage}
         query={query}
       />
