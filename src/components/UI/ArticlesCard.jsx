@@ -1,7 +1,12 @@
-import { useState, useRef, useEffect } from "react";
+// libraries
+import { useState, useCallback } from "react";
 import { useLoaderData } from "react-router-dom";
 
+// pages
 import ArticlePage from "../../pages/Article";
+
+// components
+import SearchFilter from "./SearchFilter";
 import Pagination from "../UI/Pagination";
 
 const ArticlesCard = () => {
@@ -12,34 +17,14 @@ const ArticlesCard = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [queriedArticles, setQueriedArticles] = useState(null);
+  const [filteredArticles, setFilteredArticles] = useState(null);
 
-  const inputRef = useRef(null);
+  // if (query && currentPage !== page) setCurrentPage(page);
 
-  const queryString = window.location.search;
-  const params = new URLSearchParams(queryString);
-  const query = params.get("query");
-  const page = params.get("page");
-
-  if (query && currentPage !== page) setCurrentPage(page);
-
-  const handleSearch = () => {
-    const searchQuery = inputRef.current.value.trim().toLowerCase();
-    onFilter(searchQuery);
-  };
-
-  const onFilter = (searchQuery) => {
-    const filteredArticles = articles.filter((article) =>
-      article.title.toLowerCase().includes(searchQuery)
-    );
-
-    setQueriedArticles(filteredArticles);
+  const handleFilteredData = useCallback((filtered) => {
+    setFilteredArticles(filtered);
     setCurrentPage(1);
-  };
-
-  useEffect(() => {
-    console.log(queriedArticles, "fired");
-  }, [queriedArticles]);
+  }, []);
 
   const handleOpen = (selection) => {
     setFilteredArticle(
@@ -56,12 +41,12 @@ const ArticlesCard = () => {
     setCurrentPage(number);
   };
 
-  let data = queriedArticles ? queriedArticles : articles;
+  let articlesData = filteredArticles ? filteredArticles : articles;
 
   const itemsPerPage = 9;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = articlesData.slice(indexOfFirstItem, indexOfLastItem);
 
   const articlesCardData = (
     <div className="row">
@@ -92,21 +77,15 @@ const ArticlesCard = () => {
 
   return (
     <>
-      <input
-        ref={inputRef}
-        type="text"
-        placeholder="Type keyword here..."
-        onChange={handleSearch}
-      />
+      <SearchFilter onFilter={handleFilteredData} articles={articles} />
       {isToggled && (
         <ArticlePage article={filteredArticle} onClose={handleClose} />
       )}
       {articlesCardData}
       <Pagination
         paginate={paginate}
-        totalItems={data.length}
+        totalItems={articlesData.length}
         itemsPerPage={itemsPerPage}
-        query={query}
       />
     </>
   );

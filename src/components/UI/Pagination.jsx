@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
-const Pagination = ({ paginate, itemsPerPage, totalItems, query }) => {
+const Pagination = ({ paginate, itemsPerPage, totalItems }) => {
+  const queryString = window.location.search;
+  const params = new URLSearchParams(queryString);
+  const query = params.get("query");
+
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {

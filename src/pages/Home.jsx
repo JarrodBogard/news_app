@@ -3,7 +3,7 @@ import ArticlesCard from "../components/UI/ArticlesCard";
 
 const HomePage = () => {
   return (
-    <div className="container">
+    <div className="container position-relative">
       <SearchBar />
       <ArticlesCard />
     </div>
