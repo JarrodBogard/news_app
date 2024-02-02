@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import classes from "./Pagination.module.css";
 
 const Pagination = ({ paginate, itemsPerPage, totalItems }) => {
   const queryString = window.location.search;
@@ -27,7 +28,11 @@ const Pagination = ({ paginate, itemsPerPage, totalItems }) => {
 
   return (
     <nav>
-      <ul className="pagination mt-2 justify-content-center">{pages}</ul>
+      <ul
+        className={`pagination mt-2 justify-content-center ${classes.pagination}`}
+      >
+        {pages}
+      </ul>
     </nav>
   );
 };

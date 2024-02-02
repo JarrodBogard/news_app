@@ -1,0 +1,19 @@
+@media (max-width: 720px) {
+  .title {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .form input {
+    margin-left: 92px;
+    margin-top: 10px;
+  }
+}
+
+/* @media (min-width: 320px) {
+  .form input {
+    width: 85%;
+    margin-top: 10px;
+  }
+} */

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useNavigation } from "react-router-dom";
 
+import classes from "./SearchFilter.module.css";
+
 const SearchFilter = ({ onFilter }) => {
   const { articles } = useLoaderData();
   const navigation = useNavigation();
@@ -24,7 +26,7 @@ const SearchFilter = ({ onFilter }) => {
   }, [onFilter, articles, searchQuery, navigation]);
 
   return (
-    <div className={`position-absolute top-0 start-0`}>
+    <div className={`position-absolute top-0 start-0 ${classes.filter}`}>
       <input
         value={searchQuery}
         type="text"

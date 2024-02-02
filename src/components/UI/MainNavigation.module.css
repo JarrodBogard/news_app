@@ -2,3 +2,11 @@
 .list a.active {
   font-weight: bolder;
 }
+
+@media (max-width: 576px) {
+  .navigation {
+    display: flex;
+    justify-content: center !important;
+    text-align: center;
+  }
+}

@@ -1,0 +1,19 @@
+@media (max-width: 768px) {
+  .filter input {
+    width: 75%;
+  }
+}
+
+@media (max-width: 720px) {
+  .filter input {
+    width: 174px;
+    margin-left: 48px;
+  }
+}
+
+/* @media (min-width: 425px) {
+  .filter input {
+    width: 50%;
+    margin-left: 16px;
+  }
+} */

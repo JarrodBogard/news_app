@@ -1,10 +1,10 @@
 const ArticlesCardContent = ({ items, onOpen }) => {
   return (
-    <div className="row">
+    <div className="row row-gap-2 align-items-center">
       {items.map((article) => (
         <div
           key={article.source.id + Math.random()}
-          className="col-4 g-4"
+          className="col-xl-3 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-3"
           onClick={() => onOpen(article.title)}
         >
           <div

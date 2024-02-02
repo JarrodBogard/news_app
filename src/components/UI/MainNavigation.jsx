@@ -4,13 +4,13 @@ import classes from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-dark bg-gradient sticky-top border-bottom border-light">
-      <div className="container-fluid">
-        <NavLink className="navbar-brand text-white" to={"/"}>
+    <nav className="navbar navbar-expand-sm bg-dark bg-gradient sticky-top border-bottom border-light">
+      <div className={`container-fluid ${classes.navigation}`}>
+        <NavLink className={`navbar-brand text-white ${classes.logo}`} to={"/"}>
           Logo
         </NavLink>
         <div
-          className="collapse navbar-collapse justify-content-between"
+          className={`navbar-collapse justify-content-between ${classes.navigation}`}
           id="navbarNav"
         >
           <ul className={`navbar-nav ${classes.list}`}>

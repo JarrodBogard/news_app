@@ -11,7 +11,6 @@ import RootLayout from "./components/layouts/Root";
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
 import ArticlesPage from "./pages/Articles";
-import ArticlePage from "./pages/Article";
 
 // components
 

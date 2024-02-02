@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Left Calculation</title>
+    <style>
+      .relative-container {
+        position: relative;
+        width: 300px;
+        height: 200px;
+        background-color: #eee;
+      }
+
+      .moving-element {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        background-color: #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="relative-container">
+      <div class="moving-element" id="elementToMove"></div>
+    </div>
+
+    <script>
+      // Get the element
+      var element = document.getElementById("elementToMove");
+
+      // Calculate the new left position dynamically (for example, moving 50 pixels to the right)
+      var currentLeft = parseFloat(window.getComputedStyle(element).left);
+      var newLeft = currentLeft + 100;
+
+      // Set the new left position
+      element.style.left = newLeft + "px";
+    </script>
+  </body>
+</html>
