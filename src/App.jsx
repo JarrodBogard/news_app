@@ -47,7 +47,7 @@ function App() {
                 return oldQuery !== newQuery;
               },
             },
-            { index: ":articleId", element: <ArticlePage /> },
+            // { index: ":articleId", element: <ArticlePage /> },
           ],
         },
       ],
