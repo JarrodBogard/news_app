@@ -7,6 +7,7 @@ import ArticlePage from "../../pages/Article";
 
 // components
 import SearchFilter from "./SearchFilter";
+import ArticlesCardContent from "./ArticlesCardContent";
 import Pagination from "../UI/Pagination";
 
 const ArticlesCard = () => {
@@ -26,15 +27,11 @@ const ArticlesCard = () => {
     setCurrentPage(1);
   }, []);
 
-  const handleOpen = (selection) => {
+  const handleToggle = (selection) => {
     setFilteredArticle(
       ...articles.filter((article) => article.title === selection)
     );
-    setIsToggled(true);
-  };
-
-  const handleClose = () => {
-    setIsToggled(false);
+    setIsToggled(!isToggled);
   };
 
   const paginate = (number) => {
@@ -48,40 +45,13 @@ const ArticlesCard = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = articlesData.slice(indexOfFirstItem, indexOfLastItem);
 
-  const articlesCardData = (
-    <div className="row">
-      {currentItems.map((article) => (
-        <div
-          key={article.source.id + Math.random()}
-          className="col-4 g-4"
-          onClick={() => handleOpen(article.title)}
-        >
-          <div
-            className="card text-center shadow border border-0 rounded-4"
-            style={{ width: "22rem", height: "22rem" }}
-          >
-            <div className="card-body d-flex flex-column justify-content-around bg-dark bg-gradient rounded-3">
-              <img
-                src={article.urlToImage}
-                alt={article.title}
-                className="card-img"
-                style={{ maxHeight: "200px" }}
-              />
-              <h5 className="card-text text-white">{article.title}</h5>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-
   return (
     <>
       <SearchFilter onFilter={handleFilteredData} articles={articles} />
       {isToggled && (
-        <ArticlePage article={filteredArticle} onClose={handleClose} />
+        <ArticlePage article={filteredArticle} onClose={handleToggle} />
       )}
-      {articlesCardData}
+      <ArticlesCardContent items={currentItems} onOpen={handleToggle} />
       <Pagination
         paginate={paginate}
         totalItems={articlesData.length}
