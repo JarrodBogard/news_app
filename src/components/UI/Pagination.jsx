@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import classes from "./Pagination.module.css";
 
 const Pagination = ({ paginate, itemsPerPage, totalItems }) => {
-  const queryString = window.location.search;
-  const params = new URLSearchParams(queryString);
-  const query = params.get("query");
+  const location = useLocation();
+  const pathname = location.pathname;
+  const query = location.search.split("&")[0];
+
+  // const queryString = window.location.search;
+  // const params = new URLSearchParams(queryString);
+  // const query = params.get("query");
 
   const pageNumbers = [];
 
@@ -17,7 +21,9 @@ const Pagination = ({ paginate, itemsPerPage, totalItems }) => {
       <Link
         className="page-link rounded m-1 bg-dark bg-gradient text-white border border-0 shadow"
         to={`${
-          query ? `/articles?query=${query}&page=${number}` : `?page=${number}`
+          pathname !== "/"
+            ? `/articles${query}&page=${number}`
+            : `?page=${number}`
         }`}
         onClick={() => paginate(number)}
       >

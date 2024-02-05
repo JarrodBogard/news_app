@@ -11,6 +11,12 @@
   }
 }
 
+@media (max-width: 524px) {
+  .filter input {
+    display: none;
+  }
+}
+
 /* @media (min-width: 425px) {
   .filter input {
     width: 50%;

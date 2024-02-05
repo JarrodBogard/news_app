@@ -18,11 +18,11 @@ export const searchBarArticlesLoader = async ({ request }) => {
 
   let query = searchParams.get("query");
 
-  if (!query) {
-    const queryString = window.location.search;
-    const params = new URLSearchParams(queryString);
-    query = params.get("query");
-  }
+  // if (!query) {
+  //   const queryString = window.location.search;
+  //   const params = new URLSearchParams(queryString);
+  //   query = params.get("query");
+  // }
 
   const response = await fetch(
     `https://newsapi.org/v2/everything?q=${query}&apiKey=${api_key}`

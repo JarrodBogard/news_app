@@ -30,7 +30,7 @@ const SearchFilter = ({ onFilter }) => {
       <input
         value={searchQuery}
         type="text"
-        placeholder="Type keyword here..."
+        placeholder="Search keyword"
         onChange={() => setSearchQuery(event.target.value)}
         className="form-control focus-ring focus-ring-light border border-color-white"
       />
