@@ -1,13 +1,13 @@
 import { useFetcher } from "react-router-dom";
 
-import classes from "../../css/Icons.module.css";
+import FeatureButtons from "../UI/FeatureButtons";
 
 const ArticlesCardContent = ({ items, onOpen }) => {
   const { submit } = useFetcher();
 
   const handleLike = (event, article) => {
     event.stopPropagation();
-    submit(article, { method: "POST", action: "add" });
+    submit(article, { method: "POST", action: "/add" });
   };
 
   return (
@@ -25,27 +25,14 @@ const ArticlesCardContent = ({ items, onOpen }) => {
             <div className="card-body d-flex flex-column justify-content-between bg-dark bg-gradient rounded-3">
               <img
                 src={article.urlToImage}
-                alt={article.title}
+                alt={article.title.substring(0, 100) + "..."}
                 className="card-img"
                 style={{ maxHeight: "200px" }}
               />
               <h5 className="card-text text-white">
                 {article.title.substring(0, 100) + "..."}
               </h5>
-              <div className="d-flex justify-content-around">
-                <span className={`material-symbols-outlined ${classes.icon}`}>
-                  share
-                </span>
-                <span className={`material-symbols-outlined ${classes.icon}`}>
-                  comment
-                </span>
-                <span
-                  className={`material-symbols-outlined ${classes.icon}`}
-                  onClick={(event) => handleLike(event, article)}
-                >
-                  favorite
-                </span>
-              </div>
+              <FeatureButtons article={article} onLike={handleLike} />
             </div>
           </div>
         </div>

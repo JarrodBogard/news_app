@@ -17,8 +17,6 @@ export const searchBarArticlesLoader = async ({ params }) => {
   // const searchParams = new URL(request.url).searchParams;
   // let query = searchParams.get("query");
 
-  console.log("fire))))))))))))))))))))");
-  console.log(params);
   const category = params.category;
 
   // if (!query) {
