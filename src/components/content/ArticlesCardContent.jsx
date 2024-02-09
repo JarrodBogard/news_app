@@ -1,4 +1,15 @@
+import { useFetcher } from "react-router-dom";
+
+import classes from "../../css/Icons.module.css";
+
 const ArticlesCardContent = ({ items, onOpen }) => {
+  const { submit } = useFetcher();
+
+  const handleLike = (event, article) => {
+    event.stopPropagation();
+    submit(article, { method: "POST", action: "add" });
+  };
+
   return (
     <div className="row row-gap-2 align-items-center">
       {items.map((article) => (
@@ -11,14 +22,30 @@ const ArticlesCardContent = ({ items, onOpen }) => {
             className="card text-center shadow border border-0 rounded-4"
             style={{ width: "22rem", height: "22rem" }}
           >
-            <div className="card-body d-flex flex-column justify-content-around bg-dark bg-gradient rounded-3">
+            <div className="card-body d-flex flex-column justify-content-between bg-dark bg-gradient rounded-3">
               <img
                 src={article.urlToImage}
                 alt={article.title}
                 className="card-img"
                 style={{ maxHeight: "200px" }}
               />
-              <h5 className="card-text text-white">{article.title}</h5>
+              <h5 className="card-text text-white">
+                {article.title.substring(0, 100) + "..."}
+              </h5>
+              <div className="d-flex justify-content-around">
+                <span className={`material-symbols-outlined ${classes.icon}`}>
+                  share
+                </span>
+                <span className={`material-symbols-outlined ${classes.icon}`}>
+                  comment
+                </span>
+                <span
+                  className={`material-symbols-outlined ${classes.icon}`}
+                  onClick={(event) => handleLike(event, article)}
+                >
+                  favorite
+                </span>
+              </div>
             </div>
           </div>
         </div>

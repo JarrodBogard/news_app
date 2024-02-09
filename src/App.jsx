@@ -16,6 +16,7 @@ import ArticlesPage from "./pages/Articles";
 
 // loaders/actions
 import { initArticlesLoader, searchBarArticlesLoader } from "./util/loaders";
+import { addToFavoritesAction } from "./util/actions";
 
 import "./index.css";
 
@@ -50,6 +51,7 @@ function App() {
             // { path: ":articleId", element: <ArticlePage /> },
           ],
         },
+        { path: "add", action: addToFavoritesAction },
       ],
     },
   ]);
