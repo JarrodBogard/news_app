@@ -7,14 +7,28 @@ const ArticlesCardContent = ({ items, onOpen }) => {
 
   const handleLike = (event, article) => {
     event.stopPropagation();
-    submit(article, { method: "POST", action: "/add" });
+    const formatData = {
+      ...article,
+      name: article.source ? article.source.name : article.name,
+    };
+
+    submit(formatData, { method: "POST", action: "/add" });
+  };
+
+  const handleUnlike = (event, id) => {
+    event.stopPropagation();
+    submit({ id: id }, { method: "DELETE", action: "/delete" });
   };
 
   return (
     <div className="row row-gap-2 align-items-center">
       {items.map((article) => (
         <div
-          key={article.source.id + Math.random()}
+          key={
+            article.source
+              ? article.source.id + Math.random()
+              : article.id + Math.random()
+          }
           className="col-xl-3 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-3"
           onClick={() => onOpen(article.title)}
         >
@@ -32,7 +46,11 @@ const ArticlesCardContent = ({ items, onOpen }) => {
               <h5 className="card-text text-white">
                 {article.title.substring(0, 100) + "..."}
               </h5>
-              <FeatureButtons article={article} onLike={handleLike} />
+              <FeatureButtons
+                article={article}
+                onLike={handleLike}
+                onUnlike={handleUnlike}
+              />
             </div>
           </div>
         </div>

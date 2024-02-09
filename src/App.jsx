@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useSearchParams,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // layouts
 import RootLayout from "./components/layouts/Root";
@@ -15,8 +11,12 @@ import ArticlesPage from "./pages/Articles";
 // components
 
 // loaders/actions
-import { initArticlesLoader, searchBarArticlesLoader } from "./util/loaders";
-import { addToFavoritesAction } from "./util/actions";
+import {
+  initArticlesLoader,
+  searchArticlesLoader,
+  savedArticlesLoader,
+} from "./util/loaders";
+import { addToSavedAction, deleteFromSavedAction } from "./util/actions";
 
 import "./index.css";
 
@@ -40,7 +40,7 @@ function App() {
               // index: true
               path: ":category",
               element: <ArticlesPage />,
-              loader: searchBarArticlesLoader,
+              loader: searchArticlesLoader,
               shouldRevalidate: ({ currentUrl, nextUrl }) => {
                 const currentPath = currentUrl.pathname;
                 const newPath = nextUrl.pathname;
@@ -48,10 +48,18 @@ function App() {
                 return currentPath !== newPath;
               },
             },
-            // { path: ":articleId", element: <ArticlePage /> },
           ],
         },
-        { path: "add", action: addToFavoritesAction },
+        { path: "add", action: addToSavedAction },
+        { path: "delete", action: deleteFromSavedAction },
+        {
+          path: "saved",
+          element: <ArticlesPage />,
+          loader: savedArticlesLoader,
+          shouldRevalidate: ({ formMethod }) => {
+            return formMethod === "delete";
+          },
+        },
       ],
     },
   ]);

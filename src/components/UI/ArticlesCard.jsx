@@ -40,7 +40,7 @@ const ArticlesCard = () => {
 
   let articlesData = filteredArticles ? filteredArticles : articles;
 
-  const itemsPerPage = 9;
+  const itemsPerPage = 12;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = articlesData.slice(indexOfFirstItem, indexOfLastItem);

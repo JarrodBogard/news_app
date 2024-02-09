@@ -26,7 +26,12 @@ const MainNavigation = () => {
           </ul>
           <ul className="navbar-nav">
             <li className="nav-item">
-              <NavLink className="nav-link text-white" to={"/login"}>
+              <NavLink className="nav-link text-white" to="/saved">
+                Saved
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link text-white" to="/login">
                 Login
               </NavLink>
             </li>

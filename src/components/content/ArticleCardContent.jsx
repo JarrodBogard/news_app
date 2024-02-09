@@ -4,7 +4,7 @@ import FeatureButtons from "../UI/FeatureButtons";
 import classes from "../../css/FeatureButtons.module.css";
 
 // import { formatDistanceToNow } from "date-fns";
-const ArticleCardContent = ({ article }) => {
+const ArticleCardContent = ({ article, onClose }) => {
   const { submit } = useFetcher();
 
   const formattedDate = new Date(article.publishedAt).toLocaleDateString(
@@ -22,7 +22,19 @@ const ArticleCardContent = ({ article }) => {
 
   const handleLike = (event, article) => {
     event.stopPropagation();
-    submit(article, { method: "POST", action: "/add" });
+    const formatData = {
+      ...article,
+      name: article.source ? article.source.name : article.name,
+    };
+    submit(formatData, { method: "POST", action: "/add" });
+  };
+
+  const handleUnlike = (event, id) => {
+    event.stopPropagation();
+    submit({ id: id }, { method: "DELETE", action: "/delete" });
+    setTimeout(() => {
+      onClose();
+    }, 1000);
   };
 
   return (
@@ -43,11 +55,17 @@ const ArticleCardContent = ({ article }) => {
             {" "}
             Author: {article.author ? article.author : "unknown"}
           </li>
-          <li className="list-group-item">Publisher: {article.source.name}</li>
+          <li className="list-group-item">
+            Publisher: {article.source ? article.source.name : article.name}
+          </li>
         </ul>
       </div>
       <div className={classes.features}>
-        <FeatureButtons article={article} onLike={handleLike} />
+        <FeatureButtons
+          article={article}
+          onLike={handleLike}
+          onUnlike={handleUnlike}
+        />
       </div>
     </>
   );
