@@ -1,6 +1,18 @@
 // import { formatDistanceToNow } from "date-fns";
 const ArticleCardContent = ({ article }) => {
-  const date = new Date(article.publishedAt);
+  const formattedDate = new Date(article.publishedAt).toLocaleDateString(
+    "en-US",
+    {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }
+  );
+
+  const formattedTime = new Date(article.publishedAt).toLocaleTimeString(
+    "en-US"
+  );
+
   return (
     <div className="card border border-0 shadow">
       <img
@@ -13,9 +25,7 @@ const ArticleCardContent = ({ article }) => {
         <p className="card-text">{article.content}</p>
       </div>
       <ul className="list-group list-group-flush">
-        <li className="list-group-item">
-          Published at: {date.toLocaleString()}
-        </li>
+        <li className="list-group-item">Published: {formattedDate}</li>
         <li className="list-group-item">
           {" "}
           Author: {article.author ? article.author : "unknown"}

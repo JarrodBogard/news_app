@@ -1,7 +1,5 @@
-// import { formatDistanceToNow } from "date-fns";
-
 import Modal from "../UI/Modal";
-import ArticleCardContent from "./ArticleCardContent";
+import ArticleCardContent from "../content/ArticleCardContent";
 
 const ArticleCard = ({ article, onClose }) => {
   const articleData = (

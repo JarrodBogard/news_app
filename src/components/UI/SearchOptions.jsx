@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router";
 
-import classes from "./SearchOptions.module.css";
+import classes from "../../css/SearchOptions.module.css";
 
 const SearchOptions = () => {
   const navigate = useNavigate();
 
   const handleSearch = (selection) => {
-    navigate("/articles?query=" + selection + "&page=1");
+    navigate("/articles/" + selection);
   };
 
   return (

@@ -1,14 +1,22 @@
-import { Link, useLocation } from "react-router-dom";
-import classes from "./Pagination.module.css";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import classes from "../../css/Pagination.module.css";
+import { useEffect } from "react";
 
 const Pagination = ({ paginate, itemsPerPage, totalItems }) => {
-  const location = useLocation();
-  const pathname = location.pathname;
-  const query = location.search.split("&")[0];
+  const params = useParams();
+  const category = params.category;
+  const navigate = useNavigate();
+  // const location = useLocation();
+  // const pathname = location.pathname;
+  // const query = location.search.split("&")[0];
 
   // const queryString = window.location.search;
   // const params = new URLSearchParams(queryString);
   // const query = params.get("query");
+
+  useEffect(() => {
+    navigate(category ? `/articles/${category}` : `/`);
+  }, [category, navigate]);
 
   const pageNumbers = [];
 
@@ -21,9 +29,7 @@ const Pagination = ({ paginate, itemsPerPage, totalItems }) => {
       <Link
         className="page-link rounded m-1 bg-dark bg-gradient text-white border border-0 shadow"
         to={`${
-          pathname !== "/"
-            ? `/articles${query}&page=${number}`
-            : `?page=${number}`
+          category ? `/articles/${category}?page=${number}` : `?page=${number}`
         }`}
         onClick={() => paginate(number)}
       >

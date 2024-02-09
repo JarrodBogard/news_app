@@ -7,7 +7,7 @@ import ArticlePage from "../../pages/Article";
 
 // components
 import SearchFilter from "./SearchFilter";
-import ArticlesCardContent from "./ArticlesCardContent";
+import ArticlesCardContent from "../content/ArticlesCardContent";
 import Pagination from "../UI/Pagination";
 
 const ArticlesCard = () => {

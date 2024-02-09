@@ -36,14 +36,15 @@ function App() {
           path: "articles",
           children: [
             {
-              index: true,
+              // index: true
+              path: ":category",
               element: <ArticlesPage />,
               loader: searchBarArticlesLoader,
               shouldRevalidate: ({ currentUrl, nextUrl }) => {
-                const oldQuery = currentUrl.searchParams.get("query");
-                const newQuery = nextUrl.searchParams.get("query");
+                const currentPath = currentUrl.pathname;
+                const newPath = nextUrl.pathname;
 
-                return oldQuery !== newQuery;
+                return currentPath !== newPath;
               },
             },
             // { path: ":articleId", element: <ArticlePage /> },

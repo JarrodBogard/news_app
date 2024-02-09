@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useNavigation } from "react-router-dom";
 
-import classes from "./SearchFilter.module.css";
+import classes from "../../css/SearchFilter.module.css";
 
 const SearchFilter = ({ onFilter }) => {
   const { articles } = useLoaderData();
@@ -10,7 +10,6 @@ const SearchFilter = ({ onFilter }) => {
 
   useEffect(() => {
     if (navigation.state === "loading") {
-      console.log(navigation.state, "state");
       setSearchQuery("");
     }
 

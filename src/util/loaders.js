@@ -13,10 +13,13 @@ export const initArticlesLoader = async () => {
   return response;
 };
 
-export const searchBarArticlesLoader = async ({ request }) => {
-  const searchParams = new URL(request.url).searchParams;
+export const searchBarArticlesLoader = async ({ params }) => {
+  // const searchParams = new URL(request.url).searchParams;
+  // let query = searchParams.get("query");
 
-  let query = searchParams.get("query");
+  console.log("fire))))))))))))))))))))");
+  console.log(params);
+  const category = params.category;
 
   // if (!query) {
   //   const queryString = window.location.search;
@@ -25,7 +28,7 @@ export const searchBarArticlesLoader = async ({ request }) => {
   // }
 
   const response = await fetch(
-    `https://newsapi.org/v2/everything?q=${query}&apiKey=${api_key}`
+    `https://newsapi.org/v2/everything?q=${category}&apiKey=${api_key}`
   );
 
   if (!response.ok) {
