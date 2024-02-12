@@ -1,3 +1,18 @@
+.background {
+  background-image: url(../src/assets/images/typewriter.jpg);
+  height: 300px;
+  width: auto;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  justify-content: end;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: auto;
+  padding: 0;
+}
+
 .list a:hover,
 .list a.active {
   font-weight: bolder;

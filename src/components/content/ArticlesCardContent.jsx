@@ -41,7 +41,10 @@ const ArticlesCardContent = ({ items, onOpen }) => {
                 src={article.urlToImage}
                 alt={article.title.substring(0, 100) + "..."}
                 className="card-img"
-                style={{ maxHeight: "200px" }}
+                style={{
+                  height: "160px",
+                  // objectFit: "cover",
+                }}
               />
               <h5 className="card-text text-white">
                 {article.title.substring(0, 100) + "..."}
