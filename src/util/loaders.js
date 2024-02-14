@@ -7,7 +7,10 @@ export const initArticlesLoader = async () => {
   const response = await fetch(`${API_URL + api_key}`);
 
   if (!response.ok) {
-    throw json({ message: "Unable to fetch data" }, { status: 500 });
+    throw json(
+      { message: "Unable to fetch data" },
+      { status: response.status }
+    );
   }
 
   return response;
@@ -19,9 +22,13 @@ export const searchArticlesLoader = async ({ params }) => {
   const response = await fetch(
     `https://newsapi.org/v2/everything?q=${category}&apiKey=${api_key}`
   );
+  console.log(response);
 
   if (!response.ok) {
-    throw json({ message: "Unable to fetch data" }, { status: 500 });
+    throw json(
+      { message: "Unable to fetch data" }, // status(401): "data fetch unauthorized"
+      { status: response.status }
+    );
   }
 
   return response;
@@ -33,7 +40,10 @@ export const savedArticlesLoader = async () => {
   );
 
   if (!response.ok) {
-    throw json({ message: "Unable to fetch data" }, { status: 500 });
+    throw json(
+      { message: "Unable to fetch data" }, // status(404): "This page does not exist"
+      { status: response.status }
+    );
   }
 
   const data = await response.json();

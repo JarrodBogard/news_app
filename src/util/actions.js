@@ -33,7 +33,7 @@ export const deleteFromSavedAction = async ({ request }) => {
   );
 
   if (!response.ok) {
-    throw json({ message: "Could not delete article." }, { status: 500 });
+    throw json({ message: "Unable to perform request." }, { status: response.status });
   }
 
   return redirect("/saved");

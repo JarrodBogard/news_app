@@ -9,6 +9,7 @@ import AboutPage from "./pages/About";
 import ArticlesPage from "./pages/Articles";
 
 // components
+import ErrorBoundary from "./components/UI/ErrorBoundary";
 
 // loaders/actions
 import {
@@ -25,6 +26,7 @@ function App() {
     {
       path: "/",
       element: <RootLayout />,
+      errorElement: <ErrorBoundary />,
       children: [
         {
           index: true,
