@@ -43,7 +43,9 @@ const ArticlesCardContent = ({ items, onOpen }) => {
                 className="card-img"
                 style={{
                   height: "160px",
-                  // objectFit: "cover",
+                  objectFit: "cover",
+                  transform: "translate3d(0, 0, 1px)",
+                  // imageRendering: "high-quality",
                 }}
               />
               <h5 className="card-text text-white">

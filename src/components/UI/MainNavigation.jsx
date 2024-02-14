@@ -7,7 +7,7 @@ const MainNavigation = () => {
   return (
     <header className={classes.background}>
       <nav className="navbar navbar-expand-sm sticky-top">
-        <div className={`container-fluid ${classes.navigation}`}>
+        <div className={`container-fluid ${classes.navigation} fs-4 fw-medium`}>
           <NavLink
             className={`navbar-brand text-white ${classes.logo}`}
             to={"/"}

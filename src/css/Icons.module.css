@@ -1,7 +1,12 @@
 .icon {
   color: white;
+  cursor: pointer;
 }
 
 .iconReverse {
   color: black;
+}
+
+.fill {
+  font-variation-settings: "FILL" 1;
 }

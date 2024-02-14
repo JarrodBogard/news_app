@@ -13,9 +13,9 @@ import ErrorBoundary from "./components/UI/ErrorBoundary";
 
 // loaders/actions
 import {
-  initArticlesLoader,
-  searchArticlesLoader,
-  savedArticlesLoader,
+  initDataLoader,
+  searchDataLoader,
+  savedDataLoader,
 } from "./util/loaders";
 import { addToSavedAction, deleteFromSavedAction } from "./util/actions";
 
@@ -31,7 +31,7 @@ function App() {
         {
           index: true,
           element: <HomePage />,
-          loader: initArticlesLoader,
+          loader: initDataLoader,
           shouldRevalidate: () => false,
         },
         { path: "about", element: <AboutPage /> },
@@ -42,7 +42,7 @@ function App() {
               // index: true
               path: ":category",
               element: <ArticlesPage />,
-              loader: searchArticlesLoader,
+              loader: searchDataLoader,
               shouldRevalidate: ({ currentUrl, nextUrl }) => {
                 const currentPath = currentUrl.pathname;
                 const newPath = nextUrl.pathname;
@@ -57,7 +57,7 @@ function App() {
         {
           path: "saved",
           element: <ArticlesPage />,
-          loader: savedArticlesLoader,
+          loader: savedDataLoader,
           shouldRevalidate: ({ formMethod }) => {
             return formMethod === "delete";
           },

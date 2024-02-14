@@ -15,7 +15,7 @@ const SearchBar = () => {
   };
   return (
     <>
-      <h1 className={`h-1 text-center text-white m-2 ${classes.title}`}>
+      <h1 className={`h-1 text-center text-white mt-4 ${classes.title}`}>
         Article Search
       </h1>
       <form className={`w-50 m-auto ${classes.form}`} onSubmit={handleSubmit}>

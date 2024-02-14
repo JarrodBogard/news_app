@@ -1,6 +1,5 @@
 // libraries
 import { useState, useCallback } from "react";
-import { useLoaderData } from "react-router-dom";
 
 // pages
 import ArticlePage from "../../pages/Article";
@@ -10,9 +9,7 @@ import SearchFilter from "./SearchFilter";
 import ArticlesCardContent from "../content/ArticlesCardContent";
 import Pagination from "../UI/Pagination";
 
-const ArticlesCard = () => {
-  const { articles } = useLoaderData();
-
+const ArticlesCard = ({ articles }) => {
   const [isToggled, setIsToggled] = useState(false);
   const [filteredArticle, setFilteredArticle] = useState(null);
 

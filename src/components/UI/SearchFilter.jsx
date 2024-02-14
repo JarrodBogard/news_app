@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigation } from "react-router-dom";
+import { useNavigation } from "react-router-dom";
 
 import classes from "../../css/SearchFilter.module.css";
 
-const SearchFilter = ({ onFilter }) => {
-  const { articles } = useLoaderData();
+const SearchFilter = ({ onFilter, articles }) => {
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState("");
 
