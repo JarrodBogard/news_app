@@ -10,6 +10,8 @@ import ArticlesPage from "./pages/Articles";
 
 // components
 import ErrorBoundary from "./components/UI/ErrorBoundary";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 
 // loaders/actions
 import {
@@ -54,6 +56,8 @@ function App() {
         },
         { path: "add", action: addToSavedAction },
         { path: "delete", action: deleteFromSavedAction },
+        { path: "signup", element: <Signup /> },
+        { path: "login", element: <Login /> },
         {
           path: "saved",
           element: <ArticlesPage />,

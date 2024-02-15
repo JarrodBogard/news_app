@@ -1,12 +1,43 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase";
 
 import classes from "../../css/MainNavigation.module.css";
-// import papersImg from "../../assets/images/papers.jpg";
 
 const MainNavigation = () => {
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(uid);
+        setUserId(uid);
+      } else {
+        console.log("User is currently signed out");
+      }
+    });
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const loggedOut = await signOut(auth);
+      console.log(loggedOut);
+      console.log("Sign out successful");
+      setUserId(null);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(userId);
+
   return (
     <header className={classes.background}>
-      <nav className="navbar navbar-expand-sm sticky-top">
+      <nav className="navbar navbar-expand-sm">
         <div className={`container-fluid ${classes.navigation} fs-4 fw-medium`}>
           <NavLink
             className={`navbar-brand text-white ${classes.logo}`}
@@ -30,16 +61,30 @@ const MainNavigation = () => {
               </li>
             </ul>
             <ul className="navbar-nav">
-              <li className="nav-item">
-                <NavLink className="nav-link text-white" to="/saved">
-                  Saved
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link text-white" to="/login">
-                  Login
-                </NavLink>
-              </li>
+              {userId && (
+                <>
+                  <li className="nav-item">
+                    <NavLink className="nav-link text-white" to="/saved">
+                      Saved
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link text-white"
+                      onClick={handleLogout}
+                    >
+                      Log Out
+                    </NavLink>
+                  </li>
+                </>
+              )}
+              {!userId && (
+                <li className="nav-item">
+                  <NavLink className="nav-link text-white" to="/login">
+                    Login
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </div>
         </div>
