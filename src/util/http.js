@@ -67,5 +67,7 @@ export const savedArticlesData = async () => {
       urlToImage: data[key].urlToImage,
     });
   }
+
+  console.log(articles);
   return articles;
 };

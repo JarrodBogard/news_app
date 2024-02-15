@@ -23,8 +23,8 @@ const MainNavigation = () => {
 
   const handleLogout = async () => {
     try {
-      const loggedOut = await signOut(auth);
-      console.log(loggedOut);
+      await signOut(auth);
+
       console.log("Sign out successful");
       setUserId(null);
       navigate("/");
@@ -32,8 +32,6 @@ const MainNavigation = () => {
       console.log(error);
     }
   };
-
-  console.log(userId);
 
   return (
     <header className={classes.background}>
