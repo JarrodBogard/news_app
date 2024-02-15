@@ -13,27 +13,23 @@ const MainNavigation = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        console.log(uid);
         setUserId(uid);
       } else {
-        console.log("User is currently signed out");
+        // console.log("User is currently signed out");
       }
     });
   }, []);
 
   const handleLogout = async () => {
     try {
-      const loggedOut = await signOut(auth);
-      console.log(loggedOut);
-      console.log("Sign out successful");
+      await signOut(auth);
+      // console.log("Sign out successful");
       setUserId(null);
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(userId);
 
   return (
     <header className={classes.background}>

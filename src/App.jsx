@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { onAuthStateChanged } from "@firebase/auth";
+import { auth } from "./firebase";
 
 // layouts
 import RootLayout from "./components/layouts/Root";
@@ -7,11 +10,12 @@ import RootLayout from "./components/layouts/Root";
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
 import ArticlesPage from "./pages/Articles";
+import SavedArticlesPage from "./pages/SavedArticles";
 
 // components
 import ErrorBoundary from "./components/UI/ErrorBoundary";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import Signup from "./components/UI/Signup";
+import Login from "./components/UI/Login";
 
 // loaders/actions
 import {
@@ -24,6 +28,20 @@ import { addToSavedAction, deleteFromSavedAction } from "./util/actions";
 import "./index.css";
 
 function App() {
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+
+        setUserId(uid);
+      } else {
+        setUserId(null);
+      }
+    });
+  }, []);
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -60,8 +78,8 @@ function App() {
         { path: "login", element: <Login /> },
         {
           path: "saved",
-          element: <ArticlesPage />,
-          loader: savedDataLoader,
+          element: <SavedArticlesPage />,
+          loader: () => savedDataLoader(userId),
           shouldRevalidate: ({ formMethod }) => {
             return formMethod === "delete";
           },

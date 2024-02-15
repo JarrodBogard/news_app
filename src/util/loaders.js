@@ -19,8 +19,8 @@ export const searchDataLoader = ({ params }) => {
   });
 };
 
-export const savedDataLoader = () => {
+export const savedDataLoader = (userId) => {
   return defer({
-    articles: savedArticlesData(),
+    articles: savedArticlesData(userId),
   });
 };

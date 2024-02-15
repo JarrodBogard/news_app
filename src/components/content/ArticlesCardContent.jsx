@@ -15,9 +15,9 @@ const ArticlesCardContent = ({ items, onOpen }) => {
     submit(formatData, { method: "POST", action: "/add" });
   };
 
-  const handleUnlike = (event, id) => {
+  const handleUnlike = (event, article) => {
     event.stopPropagation();
-    submit({ id: id }, { method: "DELETE", action: "/delete" });
+    submit(article, { method: "DELETE", action: "/delete" });
   };
 
   return (

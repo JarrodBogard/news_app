@@ -10,6 +10,10 @@ import ArticlesCardContent from "../content/ArticlesCardContent";
 import Pagination from "../UI/Pagination";
 
 const ArticlesCard = ({ articles }) => {
+  if (!articles) {
+    return;
+  }
+
   const [isToggled, setIsToggled] = useState(false);
   const [filteredArticle, setFilteredArticle] = useState(null);
 

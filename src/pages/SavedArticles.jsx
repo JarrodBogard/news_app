@@ -3,9 +3,8 @@ import { useLoaderData, Await } from "react-router-dom";
 import SearchBar from "../components/UI/SearchBar";
 import ArticlesCard from "../components/UI/ArticlesCard";
 
-const ArticlesPage = () => {
+const SavedArticlesPage = () => {
   const { articles } = useLoaderData();
-  console.log(articles);
   return (
     <div className="container position-relative">
       <SearchBar />
@@ -24,4 +23,4 @@ const ArticlesPage = () => {
   );
 };
 
-export default ArticlesPage;
+export default SavedArticlesPage;
