@@ -38,9 +38,10 @@ export const searchArticlesData = async (category) => {
   // return response;
 };
 
-export const savedArticlesData = async () => {
+export const savedArticlesData = async (userId) => {
+  console.log(userId);
   const response = await fetch(
-    "https://react-course-http-tutorial-default-rtdb.firebaseio.com/favorites.json"
+    `https://react-course-http-tutorial-default-rtdb.firebaseio.com/favorites/${userId}.json`
   );
 
   if (!response.ok) {
@@ -52,20 +53,25 @@ export const savedArticlesData = async () => {
 
   const data = await response.json();
 
+  console.log(data);
+
   const articles = [];
 
-  for (const key in data) {
-    articles.push({
-      id: key,
-      name: data[key].name,
-      author: data[key].author,
-      title: data[key].title,
-      description: data[key].description,
-      content: data[key].content,
-      publishedAt: data[key].publishedAt,
-      url: data[key].url,
-      urlToImage: data[key].urlToImage,
-    });
+  for (const [key, value] of Object.entries(data)) {
+    console.log(key, value);
   }
+  // for (const key in data) {
+  //   articles.push({
+  //     id: key,
+  //     name: data[key].name,
+  //     author: data[key].author,
+  //     title: data[key].title,
+  //     description: data[key].description,
+  //     content: data[key].content,
+  //     publishedAt: data[key].publishedAt,
+  //     url: data[key].url,
+  //     urlToImage: data[key].urlToImage,
+  //   });
+  // }
   return articles;
 };

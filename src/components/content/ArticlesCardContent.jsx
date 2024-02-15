@@ -1,14 +1,39 @@
+import { useCallback, useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
+import { onAuthStateChanged } from "@firebase/auth";
+import { auth } from "../../firebase";
+import { savedArticlesData } from "../../util/http";
 
 import FeatureButtons from "../UI/FeatureButtons";
 
 const ArticlesCardContent = ({ items, onOpen }) => {
+  const [userId, setUserId] = useState(null);
+  const [savedArticles, setSavedArticles] = useState([]);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserId(user.uid);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const fetchSaved = async () => {
+      const userArticles = await savedArticlesData(userId);
+
+      setSavedArticles(userArticles);
+    };
+    fetchSaved();
+  }, [userId]);
+
   const { submit } = useFetcher();
 
   const handleLike = (event, article) => {
     event.stopPropagation();
     const formatData = {
       ...article,
+      userId: userId,
       name: article.source ? article.source.name : article.name,
     };
 
@@ -17,7 +42,7 @@ const ArticlesCardContent = ({ items, onOpen }) => {
 
   const handleUnlike = (event, id) => {
     event.stopPropagation();
-    submit({ id: id }, { method: "DELETE", action: "/delete" });
+    submit({ id: id, userId: userId }, { method: "DELETE", action: "/delete" });
   };
 
   return (
@@ -55,6 +80,7 @@ const ArticlesCardContent = ({ items, onOpen }) => {
                 article={article}
                 onLike={handleLike}
                 onUnlike={handleUnlike}
+                savedArticles={savedArticles}
               />
             </div>
           </div>
