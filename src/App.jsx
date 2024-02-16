@@ -10,8 +10,8 @@ import ArticlesPage from "./pages/Articles";
 
 // components
 import ErrorBoundary from "./components/UI/ErrorBoundary";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import Signup from "./components/UI/Signup";
+import Login from "./components/UI/Login";
 
 // loaders/actions
 import {
