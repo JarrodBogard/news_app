@@ -1,9 +1,20 @@
+import { useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
 
 import FeatureButtons from "../UI/FeatureButtons";
+import { savedArticlesData } from "../../util/http";
 
 const ArticlesCardContent = ({ items, onOpen }) => {
   const { submit } = useFetcher();
+  const [savedArticles, setSavedArticles] = useState([]);
+
+  useEffect(() => {
+    const fetchSavedData = async () => {
+      const savedArticles = await savedArticlesData();
+      setSavedArticles(savedArticles);
+    };
+    fetchSavedData();
+  }, [items]);
 
   const handleLike = (event, article) => {
     event.stopPropagation();
@@ -55,6 +66,7 @@ const ArticlesCardContent = ({ items, onOpen }) => {
                 article={article}
                 onLike={handleLike}
                 onUnlike={handleUnlike}
+                savedArticles={savedArticles}
               />
             </div>
           </div>

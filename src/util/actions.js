@@ -1,6 +1,7 @@
 import { json, redirect } from "react-router-dom";
 
 export const addToSavedAction = async ({ request }) => {
+  console.log("fired add");
   const formData = await request.formData();
   const articleData = Object.fromEntries(formData);
 
@@ -22,6 +23,7 @@ export const addToSavedAction = async ({ request }) => {
 };
 
 export const deleteFromSavedAction = async ({ request }) => {
+  console.log("fired delete");
   const formData = await request.formData();
   const id = formData.get("id");
 
@@ -33,7 +35,10 @@ export const deleteFromSavedAction = async ({ request }) => {
   );
 
   if (!response.ok) {
-    throw json({ message: "Unable to perform request." }, { status: response.status });
+    throw json(
+      { message: "Unable to perform request." },
+      { status: response.status }
+    );
   }
 
   return redirect("/saved");
