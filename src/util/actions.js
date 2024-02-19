@@ -1,7 +1,6 @@
 import { json, redirect } from "react-router-dom";
 
 export const addToSavedAction = async ({ request }) => {
-  console.log("fired add");
   const formData = await request.formData();
   const articleData = Object.fromEntries(formData);
 
@@ -16,8 +15,6 @@ export const addToSavedAction = async ({ request }) => {
   if (!response.ok) {
     throw json({ message: "Unable to save favorite" }, { status: 500 });
   }
-
-  console.log("sent");
 
   return null;
 };
@@ -40,6 +37,5 @@ export const deleteFromSavedAction = async ({ request }) => {
       { status: response.status }
     );
   }
-
-  return redirect("/saved");
+  return null;
 };

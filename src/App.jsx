@@ -59,11 +59,11 @@ function App() {
         { path: "signup", element: <Signup /> },
         { path: "login", element: <Login /> },
         {
-          path: "saved",
+          path: "/saved",
           element: <ArticlesPage />,
           loader: savedDataLoader,
           shouldRevalidate: ({ formMethod }) => {
-            return false;
+            return formMethod === "delete";
           },
         },
       ],

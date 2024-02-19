@@ -1,37 +1,19 @@
-import { useEffect, useState, useLayoutEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useState, useLayoutEffect } from "react";
 import classes from "../../css/Icons.module.css";
-import { savedArticlesData } from "../../util/http";
 
 const FeatureButtons = ({ article, onLike, onUnlike, savedArticles }) => {
-  const location = useLocation();
-  const pathname = location.pathname;
-  const [saved, setSaved] = useState(false);
+  const [existingArticle, setExistingArticle] = useState(null);
 
   useLayoutEffect(() => {
-    if (savedArticles.length) {
-      const existingArticle = savedArticles.find(
+    if (savedArticles && savedArticles.length) {
+      const foundArticle = savedArticles.find(
         (savedArticle) => savedArticle.title === article.title
       );
-      if (existingArticle) {
-        setSaved(true);
+      if (foundArticle) {
+        setExistingArticle(foundArticle);
       }
     }
   }, [article, savedArticles]);
-
-  // useEffect(() => {
-  //   const fetchSaved = async () => {
-  //     const savedArticles = await savedArticlesData();
-  //     if (
-  //       savedArticles.find(
-  //         (savedArticle) => savedArticle.title === article.title
-  //       )
-  //     ) {
-  //       setSaved(true);
-  //     }
-  //   };
-  //   fetchSaved();
-  // }, [article]);
 
   return (
     <div className="d-flex justify-content-around">
@@ -40,12 +22,12 @@ const FeatureButtons = ({ article, onLike, onUnlike, savedArticles }) => {
         comment
       </span>
       <span
-        className={`material-symbols-outlined ${saved ? classes.fill : ""} ${
-          classes.icon
-        } `}
+        className={`material-symbols-outlined ${
+          existingArticle ? classes.fill : ""
+        } ${classes.icon} `}
         onClick={
-          pathname === "/saved"
-            ? (event) => onUnlike(event, article.id)
+          existingArticle
+            ? (event) => onUnlike(event, existingArticle.id)
             : (event) => onLike(event, article)
         }
       >

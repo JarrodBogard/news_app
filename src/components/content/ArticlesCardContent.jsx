@@ -1,35 +1,72 @@
-import { useEffect, useState } from "react";
-import { useFetcher } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { useFetcher, useNavigation, useLocation } from "react-router-dom";
 
 import FeatureButtons from "../UI/FeatureButtons";
 import { savedArticlesData } from "../../util/http";
 
+let isInitial = true;
+
 const ArticlesCardContent = ({ items, onOpen }) => {
-  const { submit } = useFetcher();
+  const location = useLocation();
+  const navigation = useNavigation();
+  const { submit, state } = useFetcher();
   const [savedArticles, setSavedArticles] = useState([]);
 
   useEffect(() => {
+    if (location.pathname === "/saved") {
+      setSavedArticles(items);
+      return;
+    }
+  }, [items, location.pathname]);
+
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+
+    if (state !== "idle") {
+      // alt === "submitting"
+      return;
+    }
+
+    if (navigation.state !== "idle") {
+      // alt === "loading"
+      return;
+    }
+
+    if (location.pathname === "/saved") {
+      return;
+    }
+
     const fetchSavedData = async () => {
       const savedArticles = await savedArticlesData();
       setSavedArticles(savedArticles);
     };
+
     fetchSavedData();
-  }, [items]);
+  }, [state, navigation.state, location.pathname]);
 
-  const handleLike = (event, article) => {
-    event.stopPropagation();
-    const formatData = {
-      ...article,
-      name: article.source ? article.source.name : article.name,
-    };
+  const handleLike = useCallback(
+    (event, article) => {
+      event.stopPropagation();
+      const formatData = {
+        ...article,
+        name: article.source ? article.source.name : article.name,
+      };
 
-    submit(formatData, { method: "POST", action: "/add" });
-  };
+      submit(formatData, { method: "POST", action: "/add" });
+    },
+    [submit]
+  );
 
-  const handleUnlike = (event, id) => {
-    event.stopPropagation();
-    submit({ id: id }, { method: "DELETE", action: "/delete" });
-  };
+  const handleUnlike = useCallback(
+    (event, id) => {
+      event.stopPropagation();
+      submit({ id: id }, { method: "DELETE", action: "/delete" });
+    },
+    [submit]
+  );
 
   return (
     <div className="row row-gap-2 align-items-center">

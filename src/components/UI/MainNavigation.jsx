@@ -13,7 +13,6 @@ const MainNavigation = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        console.log(uid);
         setUserId(uid);
       } else {
         console.log("User is currently signed out");
@@ -37,10 +36,7 @@ const MainNavigation = () => {
     <header className={classes.background}>
       <nav className="navbar navbar-expand-sm">
         <div className={`container-fluid ${classes.navigation} fs-4 fw-medium`}>
-          <NavLink
-            className={`navbar-brand text-white ${classes.logo}`}
-            to={"/"}
-          >
+          <NavLink className={`navbar-brand text-white ${classes.logo}`} to="/">
             Logo
           </NavLink>
           <div
