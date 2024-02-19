@@ -16,12 +16,11 @@ export const addToSavedAction = async ({ request }) => {
     throw json({ message: "Unable to save favorite" }, { status: 500 });
   }
 
-  console.log("sent");
-
   return null;
 };
 
 export const deleteFromSavedAction = async ({ request }) => {
+  console.log("fired delete");
   const formData = await request.formData();
   const id = formData.get("id");
 
@@ -33,8 +32,10 @@ export const deleteFromSavedAction = async ({ request }) => {
   );
 
   if (!response.ok) {
-    throw json({ message: "Unable to perform request." }, { status: response.status });
+    throw json(
+      { message: "Unable to perform request." },
+      { status: response.status }
+    );
   }
-
-  return redirect("/saved");
+  return null;
 };

@@ -10,3 +10,7 @@
 .fill {
   font-variation-settings: "FILL" 1;
 }
+
+.unfill {
+  font-variation-settings: "FILL" 0;
+}

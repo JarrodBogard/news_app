@@ -4,6 +4,7 @@ const API_URL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=";
 const api_key = import.meta.env.VITE_API_KEY;
 
 export const initArticlesData = async () => {
+  console.log("fired init");
   const response = await fetch(`${API_URL + api_key}`);
 
   if (!response.ok) {
@@ -20,6 +21,7 @@ export const initArticlesData = async () => {
 };
 
 export const searchArticlesData = async (category) => {
+  console.log("fired search");
   // const category = params.category; // moved to loader
 
   const response = await fetch(
@@ -39,6 +41,7 @@ export const searchArticlesData = async (category) => {
 };
 
 export const savedArticlesData = async () => {
+  console.log("fired saved");
   const response = await fetch(
     "https://react-course-http-tutorial-default-rtdb.firebaseio.com/favorites.json"
   );
@@ -68,6 +71,5 @@ export const savedArticlesData = async () => {
     });
   }
 
-  console.log(articles);
   return articles;
 };

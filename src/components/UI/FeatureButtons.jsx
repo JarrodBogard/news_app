@@ -1,26 +1,19 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useState, useLayoutEffect } from "react";
 import classes from "../../css/Icons.module.css";
-import { savedArticlesData } from "../../util/http";
 
-const FeatureButtons = ({ article, onLike, onUnlike }) => {
-  const location = useLocation();
-  const pathname = location.pathname;
-  const [saved, setSaved] = useState(false);
+const FeatureButtons = ({ article, onLike, onUnlike, savedArticles }) => {
+  const [existingArticle, setExistingArticle] = useState(null);
 
-  useEffect(() => {
-    const fetchSaved = async () => {
-      const savedArticles = await savedArticlesData();
-      if (
-        savedArticles.find(
-          (savedArticle) => savedArticle.title === article.title
-        )
-      ) {
-        setSaved(true);
+  useLayoutEffect(() => {
+    if (savedArticles && savedArticles.length) {
+      const foundArticle = savedArticles.find(
+        (savedArticle) => savedArticle.title === article.title
+      );
+      if (foundArticle) {
+        setExistingArticle(foundArticle);
       }
-    };
-    fetchSaved();
-  }, [article]);
+    }
+  }, [article, savedArticles]);
 
   return (
     <div className="d-flex justify-content-around">
@@ -29,12 +22,12 @@ const FeatureButtons = ({ article, onLike, onUnlike }) => {
         comment
       </span>
       <span
-        className={`material-symbols-outlined ${saved ? classes.fill : ""} ${
-          classes.icon
-        } `}
+        className={`material-symbols-outlined ${
+          existingArticle ? classes.fill : ""
+        } ${classes.icon} `}
         onClick={
-          pathname === "/saved"
-            ? (event) => onUnlike(event, article.id)
+          existingArticle
+            ? (event) => onUnlike(event, existingArticle.id)
             : (event) => onLike(event, article)
         }
       >
