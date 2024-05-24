@@ -34,7 +34,7 @@ function App() {
           index: true,
           element: <HomePage />,
           loader: initDataLoader,
-          shouldRevalidate: () => false,
+          shouldRevalidate: () => false, // consider formMethod === "delete"
         },
         { path: "about", element: <AboutPage /> },
         {
@@ -49,7 +49,7 @@ function App() {
                 const currentPath = currentUrl.pathname;
                 const newPath = nextUrl.pathname;
 
-                return currentPath !== newPath;
+                return currentPath !== newPath; // consider formMethod === "delete"
               },
             },
           ],

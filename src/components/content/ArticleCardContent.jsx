@@ -1,11 +1,32 @@
-import { useFetcher } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useFetcher, useLocation } from "react-router-dom";
+
 import FeatureButtons from "../UI/FeatureButtons";
+import { savedArticlesData } from "../../util/http";
 
 import classes from "../../css/FeatureButtons.module.css";
 
 // import { formatDistanceToNow } from "date-fns";
-const ArticleCardContent = ({ article, onClose }) => {
-  const { submit } = useFetcher();
+const ArticleCardContent = ({ article, onClose, onAltered, userId }) => {
+  const location = useLocation();
+  const { submit, state } = useFetcher();
+  const [savedArticles, setSavedArticles] = useState([]);
+
+  useEffect(() => {
+    if (location.pathname === "/saved") {
+      setSavedArticles(article);
+      return;
+    }
+  }, [article, location.pathname, savedArticles]);
+
+  useEffect(() => {
+    const fetchSavedData = async () => {
+      const savedArticles = await savedArticlesData();
+      setSavedArticles(savedArticles);
+    };
+
+    fetchSavedData();
+  }, [state]); //  navigation.state, location.pathname are not required
 
   const formattedDate = new Date(article.publishedAt).toLocaleDateString(
     "en-US",
@@ -26,12 +47,14 @@ const ArticleCardContent = ({ article, onClose }) => {
       ...article,
       name: article.source ? article.source.name : article.name,
     };
+    onAltered(true);
     submit(formatData, { method: "POST", action: "/add" });
   };
 
   const handleUnlike = (event, id) => {
     event.stopPropagation();
     submit({ id: id }, { method: "DELETE", action: "/delete" });
+    onAltered(true);
     setTimeout(() => {
       onClose();
     }, 1000);
@@ -65,6 +88,8 @@ const ArticleCardContent = ({ article, onClose }) => {
           article={article}
           onLike={handleLike}
           onUnlike={handleUnlike}
+          savedArticles={savedArticles}
+          userId={userId}
         />
       </div>
     </>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -33,7 +33,7 @@ const Signup = () => {
       console.log(user);
       navigate("/");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

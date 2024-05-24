@@ -1,10 +1,15 @@
 import Modal from "../UI/Modal";
 import ArticleCardContent from "../content/ArticleCardContent";
 
-const ArticleCard = ({ article, onClose }) => {
+const ArticleCard = ({ article, onClose, onAltered, userId }) => {
   const articleData = (
     <Modal onClose={onClose}>
-      <ArticleCardContent article={article} onClose={onClose} />
+      <ArticleCardContent
+        article={article}
+        onClose={onClose}
+        onAltered={onAltered}
+        userId={userId}
+      />
     </Modal>
   );
 

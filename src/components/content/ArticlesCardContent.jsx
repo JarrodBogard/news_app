@@ -6,7 +6,13 @@ import { savedArticlesData } from "../../util/http";
 
 let isInitial = true;
 
-const ArticlesCardContent = ({ items, onOpen }) => {
+const ArticlesCardContent = ({
+  items,
+  onOpen,
+  isAltered,
+  onAltered,
+  userId,
+}) => {
   const location = useLocation();
   const navigation = useNavigation();
   const { submit, state } = useFetcher();
@@ -44,10 +50,17 @@ const ArticlesCardContent = ({ items, onOpen }) => {
       setSavedArticles(savedArticles);
     };
 
+    if (isAltered) {
+      fetchSavedData();
+      onAltered(false);
+      return;
+    }
+
     fetchSavedData();
-  }, [state, navigation.state, location.pathname]);
+  }, [isAltered, onAltered, state, navigation.state, location.pathname]);
 
   const handleLike = useCallback(
+    // useCallback unnecessary
     (event, article) => {
       event.stopPropagation();
       const formatData = {
@@ -61,6 +74,7 @@ const ArticlesCardContent = ({ items, onOpen }) => {
   );
 
   const handleUnlike = useCallback(
+    // useCallback unnecessary
     (event, id) => {
       event.stopPropagation();
       submit({ id: id }, { method: "DELETE", action: "/delete" });
@@ -104,6 +118,7 @@ const ArticlesCardContent = ({ items, onOpen }) => {
                 onLike={handleLike}
                 onUnlike={handleUnlike}
                 savedArticles={savedArticles}
+                userId={userId}
               />
             </div>
           </div>

@@ -15,7 +15,7 @@ const MainNavigation = () => {
         const uid = user.uid;
         setUserId(uid);
       } else {
-        console.log("User is currently signed out");
+        // console.log("User is currently signed out");
       }
     });
   }, []);
@@ -24,11 +24,11 @@ const MainNavigation = () => {
     try {
       await signOut(auth);
 
-      console.log("Sign out successful");
+      // console.log("Sign out successful");
       setUserId(null);
       navigate("/");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
