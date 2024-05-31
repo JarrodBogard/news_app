@@ -5,7 +5,7 @@ Easy News App is an application that allows users to seamlessly search for news 
 
 ### 1. Start by creating an account with a username (i.e. email) and password or login if you already have one.
 
-![image](https://github.com/JarrodBogard/news_app/assets/98401586/e2d288e6-b12d-47c3-87b4-9fd02fa328ce)
+![image](https://github.com/JarrodBogard/news_app/assets/98401586/40d76e8d-104a-4f57-9c0f-65b087ca25f6)
 
 ### 2. Search for articles via the search bar or click on a predefined catergory. Narrow the results down by using the "Search Keyword" bar in the top left to find articles relating to a specific keyword.
 
