@@ -8,6 +8,7 @@ import classes from "../../css/FeatureButtons.module.css";
 
 // import { formatDistanceToNow } from "date-fns";
 const ArticleCardContent = ({ article, onClose, onAltered, userId }) => {
+  console.log(article);
   const location = useLocation();
   const { submit, state } = useFetcher();
   const [savedArticles, setSavedArticles] = useState([]);
@@ -70,7 +71,12 @@ const ArticleCardContent = ({ article, onClose, onAltered, userId }) => {
         />
         <div className="card-body">
           <h5 className="card-title">{article.title}</h5>
-          <p className="card-text">{article.content}</p>
+          <p className="card-text">
+            {article.content} <br />
+            <a href={article.url} target="_blank">
+              Read Full Article
+            </a>
+          </p>
         </div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">Published: {formattedDate}</li>

@@ -59,7 +59,7 @@ const MainNavigation = () => {
                 <>
                   <li className="nav-item">
                     <NavLink className="nav-link text-white" to="/saved">
-                      Saved
+                      Saved Articles
                     </NavLink>
                   </li>
                   <li className="nav-item">

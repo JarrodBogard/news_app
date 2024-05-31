@@ -10,7 +10,7 @@ const SearchOptions = () => {
   };
 
   return (
-    <div className="container mt-2 d-flex justify-content-around text-white">
+    <div className="container mt-4 mb-3 d-flex justify-content-around text-white">
       <div className={classes.list} onClick={() => handleSearch("finance")}>
         Finance
       </div>
